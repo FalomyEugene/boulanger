@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 from urllib.error import URLError
-from streamlit_gsheets import GSheetsConnection
+#from streamlit_gsheets import GSheetsConnection
 
 # Adding a title for the app
 
