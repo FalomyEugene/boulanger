@@ -1,3 +1,3 @@
 import streamlit
 
-stream.title('Falomy Boulanger is in the oven')
+streamlit.title('Falomy Boulanger is in the oven')
