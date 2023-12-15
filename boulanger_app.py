@@ -7,5 +7,6 @@ from urllib.error import URLError
 
 st.title('Falomy Boulanger is in the oven')
 
-import streamlit as st
-st.image('sunrise.jpg', caption='Sunrise by the mountains')
+# This is to add Images as needed
+#import streamlit as st
+#st.image('sunrise.jpg', caption='Sunrise by the mountains')
