@@ -9,8 +9,8 @@ client_email = os.environ.get("GOOGLE_SHEETS_CLIENT_EMAIL")
 private_key = os.environ.get("GOOGLE_SHEETS_PRIVATE_KEY") #.replace('\\n', '\n')  # Replace escaped newlines
 
 # Authenticate with Google Sheets
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-credentials = ServiceAccountCredentials.from_json_keyfile_dict({
+# Authenticate with Google Sheets using service account file
+creds_dict = {
     "client_email": client_email,
     "private_key": private_key,
     "type": "service_account",
@@ -21,7 +21,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict({
     "token_uri": "https://oauth2.googleapis.com/token",
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/boulanjesheet%40boulanger-408218.iam.gserviceaccount.com"
-}, scope)
+}
 gc = gspread.authorize(credentials)
 
 # Open the Google Sheet
