@@ -1,0 +1,27 @@
+name: Streamlit App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        # Add any additional setup steps here
+
+    - name: Run Streamlit app
+      run: streamlit run boulanger.py  # Replace with your actual script filename
