@@ -1,16 +1,18 @@
 import os
 import streamlit as st
 import pandas as pd
-#from oauth2client.service_account import ServiceAccountCredentials
+import subprocess
 from gspread.service_account import ServiceAccountCredentials
 import toml
+import gspread
+
+# Install dependencies from requirements.txt
+subprocess.run(["pip", "install", "-r", "requirements.txt"])
 
 # Retrieve credentials from environment variables
 client_email = os.environ.get("GOOGLE_SHEETS_CLIENT_EMAIL")
-private_key = os.environ.get("GOOGLE_SHEETS_PRIVATE_KEY") #.replace('\\n', '\n')  # Replace escaped newlines
+private_key = os.environ.get("GOOGLE_SHEETS_PRIVATE_KEY")
 
-# Authenticate with Google Sheets
-# Authenticate with Google Sheets using service account file
 creds_dict = {
     "client_email": client_email,
     "private_key": private_key,
@@ -23,10 +25,11 @@ creds_dict = {
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/boulanjesheet%40boulanger-408218.iam.gserviceaccount.com"
 }
-gc = gspread.authorize(credentials)
+
+gc = gspread.authorize(ServiceAccountCredentials.from_json_keyfile_dict(creds_dict))
 
 # Open the Google Sheet
-worksheet = gc.open('Your Google Sheet Name').sheet1
+worksheet = gc.open('test1').sheet1
 
 # Get data from the Google Sheet
 data = worksheet.get_all_values()
@@ -36,6 +39,7 @@ df = pd.DataFrame(data[1:], columns=data[0])
 
 # Display the DataFrame
 st.dataframe(df)
+
 
 
 
