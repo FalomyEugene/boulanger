@@ -6,7 +6,7 @@ import pandas as pd
 
 # Retrieve credentials from environment variables
 client_email = os.environ.get("GOOGLE_SHEETS_CLIENT_EMAIL")
-private_key = os.environ.get("GOOGLE_SHEETS_PRIVATE_KEY").replace('\\n', '\n')  # Replace escaped newlines
+private_key = os.environ.get("GOOGLE_SHEETS_PRIVATE_KEY") #.replace('\\n', '\n')  # Replace escaped newlines
 
 # Authenticate with Google Sheets
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
