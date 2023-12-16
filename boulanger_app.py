@@ -1,3 +1,5 @@
+# Install dependencies from requirements.txt
+subprocess.run(["pip", "install", "-r", "requirements.txt"])
 import os
 import streamlit as st
 import pandas as pd
@@ -7,7 +9,7 @@ import toml
 import gspread
 
 # Install dependencies from requirements.txt
-subprocess.run(["pip", "install", "-r", "requirements.txt"])
+#subprocess.run(["pip", "install", "-r", "requirements.txt"])
 
 # Retrieve credentials from environment variables
 client_email = os.environ.get("GOOGLE_SHEETS_CLIENT_EMAIL")
