@@ -4,44 +4,47 @@ import pandas as pd
 import subprocess
 #from gspread.service_account import ServiceAccountCredentials
 import toml
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 
-import streamlit as st
+# Load Google Sheets credentials from secrets.toml
+gsheets_config = st.secrets["connections.gsheets"]
 
-st.subheader("📗 Google Sheets st.connection using Public URLs")
+# Load service account credentials
+credentials = service_account.Credentials.from_service_account_info({
+    "type": gsheets_config["type"],
+    "project_id": gsheets_config["project_id"],
+    "private_key_id": gsheets_config["private_key_id"],
+    "private_key": gsheets_config["private_key"].replace("\\n", "\n"),
+    "client_email": gsheets_config["client_email"],
+    "client_id": gsheets_config["client_id"],
+    "auth_uri": gsheets_config["auth_uri"],
+    "token_uri": gsheets_config["token_uri"],
+    "auth_provider_x509_cert_url": gsheets_config["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": gsheets_config["client_x509_cert_url"],
+})
 
-url = "https://docs.google.com/spreadsheets/d/1JDy9md2VZPz4JbYtRPJLs81_3jUK47nx6GYQjgU8qNY/edit?usp=sharing"
+# Connect to Google Sheets API
+service = build('sheets', 'v4', credentials=credentials)
 
-st.write("#### 1. Read public Google Worksheet as Pandas")
+# Read data from Google Sheets
+spreadsheet_url = gsheets_config["spreadsheet"]
+worksheet = gsheets_config["worksheet"]
 
-with st.echo():
-    import streamlit as st
+# Example: Reading data from Google Sheets
+try:
+    sheet = service.spreadsheets()
+    result = sheet.values().get(spreadsheetId=spreadsheet_url, range=worksheet).execute()
+    values = result.get('values', [])
 
-    from streamlit_gsheets import GSheetsConnection
+    if not values:
+        st.write("No data found.")
+    else:
+        # Display the data in a DataFrame
+        df = pd.DataFrame(values[1:], columns=values[0])
+        st.write("Data from Google Sheets:")
+        st.write(df)
 
-    conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+except Exception as e:
+    st.write("An error occurred:", e)
 
-    df = conn.read(spreadsheet=url, usecols=[0, 1])
-    st.dataframe(df)
-
-st.write("#### 2. Query public Google Worksheet using SQL")
-st.info(
-    "Mutation SQL queries are in-memory only and do not results in the Worksheet update.",
-    icon="ℹ️",
-)
-st.warning(
-    """You can query only one Worksheet in provided public Spreadsheet,
-        use Worksheet name as target in from SQL queries.
-        The worksheet, which you query is defined by GID query parameter or GID parameters to query method.""",
-    icon="⚠️",
-)
-
-
-with st.echo():
-    import streamlit as st
-
-    from streamlit_gsheets import GSheetsConnection
-
-    conn = st.experimental_connection("gsheets", type=GSheetsConnection)
-
-    df = conn.query('select births from "Example 2" limit 10', spreadsheet=url)
-    st.dataframe(df)
