@@ -2,6 +2,7 @@ import os
 import streamlit as st
 import pandas as pd
 #from oauth2client.service_account import ServiceAccountCredentials
+from gspread.service_account import ServiceAccountCredentials
 import toml
 
 # Retrieve credentials from environment variables
