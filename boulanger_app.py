@@ -2,7 +2,7 @@ import os
 import streamlit as st
 import pandas as pd
 #from oauth2client.service_account import ServiceAccountCredentials
-#import gspread
+import gspread
 
 # Retrieve credentials from environment variables
 client_email = os.environ.get("GOOGLE_SHEETS_CLIENT_EMAIL")
