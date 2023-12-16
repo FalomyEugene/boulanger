@@ -4,20 +4,19 @@ import requests
 from urllib.error import URLError
 #from streamlit_gsheets import GSheetsConnection
 
-# Adding a title for the app
+# Adding a title and description
 
 st.title('🍞 Falomy Boulanger🥖')
-st.text('"Où la farine et le sucre dansent avec délice"')
+st.markdown('"Où la farine et le sucre dansent avec délice"')
 
+#establishing a goodgle sheet connection
 
-#Trying, to be deleted
-
-# example/st_app.py
-
-url = "https://docs.google.com/spreadsheets/d/1JDy9md2VZPz4JbYtRPJLs81_3jUK47nx6GYQjgU8qNY/edit?usp=sharing"
 conn = st.experimental_connection("gsheets", type=GSheetsConnection)
-data = conn.read(spreadsheet=url, usecols=[0, 1])
-st.dataframe(data)
+df = conn.read(worksheet="test1", usecols=list(range(6)), ttl=5)
+df = df.dropna(how="all")
+
+
+st.dataframe(df)
 
 
 
