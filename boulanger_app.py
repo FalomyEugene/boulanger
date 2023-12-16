@@ -2,10 +2,10 @@ import os
 import streamlit as st
 import pandas as pd
 import subprocess
-#from gspread.service_account import ServiceAccountCredentials
+from gspread.service_account import ServiceAccountCredentials
 import toml
-#from google.oauth2 import service_account
-#from googleapiclient.discovery import build
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 
 # Load Google Sheets credentials from secrets.toml
 gsheets_config = st.secrets["connections.gsheets"]
