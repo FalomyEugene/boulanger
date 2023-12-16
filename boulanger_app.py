@@ -1,22 +1,30 @@
 import streamlit as st
 import pandas as pd
-import requests
-from urllib.error import URLError
-#from streamlit_gsheets import GSheetsConnection
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 # Adding a title and description
-
 st.title('🍞 Falomy Boulanger🥖')
 st.markdown('"Où la farine et le sucre dansent avec délice"')
 
-#establishing a goodgle sheet connection
+# Google Sheets authentication
+scope = ['https://spreadsheets.google.com/feeds',
+         'https://www.googleapis.com/auth/drive']
+credentials = ServiceAccountCredentials.from_json_keyfile_name('path/to/your/credentials.json', scope)
+gc = gspread.authorize(credentials)
 
-conn = st.experimental_connection("gsheets", type=GSheetsConnection)
-df = conn.read(worksheet="test1", usecols=list(range(6)), ttl=5)
-df = df.dropna(how="all")
+# Open the Google Sheet
+worksheet = gc.open('Your Google Sheet Name').sheet1
 
+# Get data from the Google Sheet
+data = worksheet.get_all_values()
 
+# Create a DataFrame
+df = pd.DataFrame(data[1:], columns=data[0])
+
+# Display the DataFrame
 st.dataframe(df)
+
 
 
 
