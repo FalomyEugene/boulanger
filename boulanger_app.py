@@ -7,7 +7,8 @@ import toml
 #from googleapiclient.discovery import build
 
 # Load Google Sheets credentials from secrets.toml
-gsheets_config = st.secrets["connections.gsheets"]
+#from gspread.service_account import ServiceAccountCredentials
+#gsheets_config = st.secrets["connections.gsheets"]
 
 # Load service account credentials
 credentials = service_account.Credentials.from_service_account_info({
