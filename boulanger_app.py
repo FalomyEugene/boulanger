@@ -6,26 +6,14 @@ import streamlit as st  # pip install streamlit
 # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout="wide")
 
-
-
-
 # ---- READ EXCEL ----
-@st.cache_data
-def get_data_from_excel():
-    df = pd.read_excel(
-        io="supermarkt_sales.xlsx",
-        engine="openpyxl",
-        sheet_name="Sales",
-        skiprows=3,
-        usecols="B:R",
-        nrows=1000,
-    )
-    # Add 'hour' column to dataframe
-    df["hour"] = pd.to_datetime(df["Time"], format="%H:%M:%S").dt.hour
-    return df
-
-
-
+# Alternatively, you can create a sample DataFrame for testing
+    df = pd.DataFrame({
+      'City': ['City1', 'City2', 'City3'],
+      'Customer_type': ['Type1', 'Type2', 'Type1'],
+      'Gender': ['Male', 'Female', 'Male'],
+     # Add other columns as needed
+ })
 
 
 # ---- SIDEBAR ----
