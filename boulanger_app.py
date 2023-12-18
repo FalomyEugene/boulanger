@@ -1,41 +1,11 @@
+# example/st_app_gsheets_using_service_account.py
 
-import pandas as pd  # pip install pandas openpyxl
-# import plotly.express as px  # pip install plotly-express
-import streamlit as st  # pip install streamlit
+import streamlit as st
+from streamlit_gsheets import GSheetsConnection
 
-# emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
-st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout="wide")
+st.title("Read Google Sheet as DataFrame")
 
-# ---- READ EXCEL ----
-# Alternatively, you can create a sample DataFrame for testing
-df = pd.DataFrame({
-    'City': ['Farine'],
-    'Customer_type': ['Type1', 'Type2', 'Type1'],
-    'Gender': ['Male', 'Female', 'Male'],
-    # Add other columns as needed
- })
+conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+df = conn.read(worksheet="Sheet1")
 
-
-# ---- SIDEBAR ----
-st.sidebar.header("Production Entry:")
-city = st.sidebar.multiselect(
-    "Select Farine:",
-    options=df["City"].unique(),
-    default=df["City"].unique()
-)
-
-customer_type = st.sidebar.multiselect(
-    "Select the Customer Type:",
-    options=df["Customer_type"].unique(),
-    default=df["Customer_type"].unique(),
-)
-
-gender = st.sidebar.multiselect(
-    "Select the Gender:",
-    options=df["Gender"].unique(),
-    default=df["Gender"].unique()
-)
-
-df_selection = df.query(
-    "City == @city & Customer_type ==@customer_type & Gender == @gender"
-)
+st.dataframe(df)
