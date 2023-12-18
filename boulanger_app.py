@@ -47,4 +47,3 @@ try:
 
 except Exception as e:
     st.write("An error occurred:", e)
-
