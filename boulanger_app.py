@@ -9,7 +9,7 @@ st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout
 # ---- READ EXCEL ----
 # Alternatively, you can create a sample DataFrame for testing
 df = pd.DataFrame({
-    'City': ['City1', 'City2', 'City3'],
+    'City': ['Farine'],
     'Customer_type': ['Type1', 'Type2', 'Type1'],
     'Gender': ['Male', 'Female', 'Male'],
     # Add other columns as needed
@@ -17,9 +17,9 @@ df = pd.DataFrame({
 
 
 # ---- SIDEBAR ----
-st.sidebar.header("Please Filter Here:")
+st.sidebar.header("Production Entry:")
 city = st.sidebar.multiselect(
-    "Select the City:",
+    "Select Farine:",
     options=df["City"].unique(),
     default=df["City"].unique()
 )
