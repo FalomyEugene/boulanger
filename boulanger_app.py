@@ -23,7 +23,7 @@ edutech_data = edutech_data.get_all_records()
 # edutech_data
 
 edutech_df = pd.DataFrame.from_dict(edutech_data)
-#st.write(edutech_df.head(3))
+st.write(edutech_df.head(3))
 # edutech_df.head(3)
 # print(edutech_df)
 
