@@ -25,3 +25,7 @@ edutech_df = pd.DataFrame.from_dict(edutech_data)
 st.write(edutech_df.head(3))
 # edutech_df.head(3)
 # print(edutech_df)
+
+# ---- MAINPAGE ----
+st.title(":bar_chart: Falomy Boulangerie _ Rapport hebdomadaire ")
+st.markdown("##")
