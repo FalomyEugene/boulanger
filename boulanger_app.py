@@ -34,6 +34,27 @@ st.markdown("##")
 
 # Get the current date and time
 
+
+# ---- SIDEBAR ----
+
+# Get input data from user
+date = st.date_input("Date", datetime.now())
+farine = st.number_input("Farine")
+mantegue = st.number_input("Mantegue")
+bois = st.number_input("Bois")
+gaz = st.number_input("Gaz")
+sucre = st.number_input("Sucre")
+ledvin = st.number_input("Ledvin")
+sel = st.number_input("Sel")
+
+# Prepare data to be updated
+data_to_update = [date, farine, mantegue, bois, gaz, sucre, ledvin, sel]
+
+# Update Google Sheet
+sheet.append_row(data_to_update)
+
+st.success("Data updated successfully.")
+
 current_date_time = datetime.now()
 # Format the date as a string
 formatted_date = current_date_time.strftime("%Y-%m-%d %H:%M:%S")
