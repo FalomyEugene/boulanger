@@ -27,7 +27,7 @@ st.write(edutech_df.head(3))
 # print(edutech_df)
 
 # ---- MAINPAGE ----
-st.title(":bar_chart: Boulangerie Rapport hebdomadaire")
+st.title(":bar_chart: Boulangerie Rapport-hebdomadaire")
 st.markdown("##")
 
 
