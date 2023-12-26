@@ -18,7 +18,7 @@ client = gs.authorize(credentials)
 
 
 sheet = client.open('Test1')
-edutech_data = sheet.get_worksheet(0)
+edutech_data = sheet.get_worksheet(1)
 edutech_data = edutech_data.get_all_records()
 # edutech_data
 
