@@ -23,7 +23,7 @@ edutech_data = edutech_data.get_all_records()
 # edutech_data
 
 edutech_df = pd.DataFrame.from_dict(edutech_data)
-st.write(edutech_df.head(3))
+#st.write(edutech_df.head(3))
 # edutech_df.head(3)
 # print(edutech_df)
 
@@ -36,13 +36,13 @@ st.markdown("##")
 
 
 # ---- SIDEBAR ----
-st.sidebar.header("Please Filter Here:")
+st.sidebar.header("Rapportez Ici:")
 
 # Get input data from user
 date = st.sidebar.date_input("Date", datetime.now())
 
 # Define the materials
-mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel"]
+mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Autre"]
 
 # Multiselect for selecting the mat
 selected_mat = st.sidebar.multiselect("Select the mat:", mat_options)
