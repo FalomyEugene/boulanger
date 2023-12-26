@@ -27,9 +27,9 @@ st.write(edutech_df.head(3))
 # print(edutech_df)
 
 # ---- MAINPAGE ----
-# ---- MAINPAGE ----
-st.title(":bar_chart: Falomy Boulangerie _ Rapport hebdomadaire ", unsafe_allow_html=True)
-st.markdown("<h2 style='font-size:12px; display:inline-block;'> </h2>", unsafe_allow_html=True)
+st.markdown(":bar_chart: **Falomy Boulangerie _ Rapport hebdomadaire**", unsafe_allow_html=True)
+st.markdown("<h2 style='font-size:12px;'> </h2>", unsafe_allow_html=True)
+
 
 
 
