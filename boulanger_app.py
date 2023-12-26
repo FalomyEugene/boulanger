@@ -38,6 +38,9 @@ st.markdown("##")
 # ---- SIDEBAR ----
 st.sidebar.header("Please Filter Here:")
 
+# Get input data from user
+date = st.sidebar.date_input("Date", datetime.now())
+
 # Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel"]
 
@@ -52,8 +55,7 @@ for mat in selected_mat:
     value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
     mat_values[mat] = value
 
-# Get input data from user
-date = st.sidebar.date_input("Date", datetime.now())
+
 
 # Prepare data to be updated
 data_to_update = [date, farine, mantegue, bois, gaz, sucre, ledvin, sel]
