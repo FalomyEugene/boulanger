@@ -19,8 +19,9 @@ client = gs.authorize(credentials)
 sheet = client.open('Test1')
 edutech_data = sheet.get_worksheet(0)
 edutech_data = edutech_data.get_all_records()
-edutech_data
+# edutech_data
 
 edutech_df = pd.DataFrame.from_dict(edutech_data)
-edutech_df.head(3)
-print(edutech_df)
+st.write(edutech_df.head(3))
+# edutech_df.head(3)
+# print(edutech_df)
