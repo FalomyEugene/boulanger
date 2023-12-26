@@ -38,7 +38,7 @@ current_date_time = datetime.now()
 # Format the date as a string
 formatted_date = current_date_time.strftime("%Y-%m-%d %H:%M:%S")
 # Display the date in your Streamlit app
-st.write("Current Date and Time:", formatted_date)
+st.write("Last Updated:", formatted_date)
 
 
 
