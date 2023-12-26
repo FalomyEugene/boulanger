@@ -38,21 +38,22 @@ st.markdown("##")
 # ---- SIDEBAR ----
 st.sidebar.header("Please Filter Here:")
 
-# Multiselect for selecting the mat
+# Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel"]
+
+# Multiselect for selecting the mat
 selected_mat = st.sidebar.multiselect("Select the mat:", mat_options)
+
+# Create a dictionary to store the values for each selected material
+mat_values = {}
+
+# Loop through selected materials and get corresponding numbers
+for mat in selected_mat:
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
+    mat_values[mat] = value
 
 # Get input data from user
 date = st.sidebar.date_input("Date", datetime.now())
-farine = st.sidebar.number_input("Farine")
-mantegue = st.sidebar.number_input("Mantegue")
-bois = st.sidebar.number_input("Bois")
-gaz = st.sidebar.number_input("Gaz")
-sucre = st.sidebar.number_input("Sucre")
-ledvin = st.sidebar.number_input("Ledvin")
-sel = st.sidebar.number_input("Sel")
-
-# Now you can use the selected values in your Streamlit app as needed
 
 # Prepare data to be updated
 data_to_update = [date, farine, mantegue, bois, gaz, sucre, ledvin, sel]
