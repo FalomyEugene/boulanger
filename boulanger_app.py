@@ -8,7 +8,7 @@ SCOPES = [
 'https://www.googleapis.com/auth/spreadsheets',
 'https://www.googleapis.com/auth/drive'
 ]
-SERVICE_ACCOUNT_FILE = r'C:\Users\Feugene\boulanjer secrets.toml'
+SERVICE_ACCOUNT_FILE = 'boulanjer cred.json'
 
 credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
