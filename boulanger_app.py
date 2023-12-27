@@ -60,6 +60,5 @@ data_to_update = [date] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
 
 # Update Google Sheet
 sheet.append_row(data_to_update)
-
 st.success("Data updated successfully.")
 
