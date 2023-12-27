@@ -40,14 +40,9 @@ date_str = date.strftime("%Y-%m-%d")
 # Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Excell", "Autre"]
 
-# Multiselect for selecting the mat
-selected_mat = st.sidebar.multiselect("Select the mat:", mat_options, key="selected_mat")
-
-# Create a dictionary to store the values for each selected material
+# Loop through each material and create an input field for its value
 mat_values = {}
-
-# Loop through selected materials and get corresponding numbers
-for mat in selected_mat:
+for mat in mat_options:
     value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
     mat_values[mat] = value
 
@@ -60,6 +55,3 @@ if st.sidebar.button("Submit"):
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
-
-    # Clear the selected materials and rerun the app to hide them
-    st.experimental_rerun()
