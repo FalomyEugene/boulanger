@@ -40,12 +40,15 @@ date_str = date.strftime("%Y-%m-%d")
 # Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Excell", "Autre"]
 
+# Multiselect for selecting the mat
+selected_mat = st.sidebar.multiselect("Select the mat:", mat_options, key="selected_mat")
+
 # Create a dictionary to store the values for each selected material
 mat_values = {}
-for mat in mat_options:
-    # Use unique key for each widget
-    key = f"{mat}_input"
-    value = st.sidebar.number_input(f"Enter value for {mat}", key=key, value=mat_values.get(mat, 0))
+
+# Loop through selected materials and get corresponding numbers
+for mat in selected_mat:
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
     mat_values[mat] = value
 
 # Add a submit button
@@ -58,11 +61,5 @@ if st.sidebar.button("Submit"):
 
     st.success("Data updated successfully.")
 
-    # Clear the input fields (set values to 0) after submitting
-    mat_values = {mat: 0 for mat in mat_options}
-
-# Display the input fields in the sidebar
-for mat in mat_options:
-    # Use unique key for each widget
-    key = f"{mat}_input"
-    mat_values[mat] = st.sidebar.number_input(f"Enter value for {mat}", key=key, value=mat_values.get(mat, 0))
+    # Clear the selected materials and rerun the app to hide them
+    st.experimental_rerun()
