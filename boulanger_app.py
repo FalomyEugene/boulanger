@@ -36,10 +36,10 @@ st.markdown("##")
 google_form_url = "https://docs.google.com/forms/d/e/1FAIpQLSfw0wN0hundqYfBytzI_P1KBG5MrTsdwlAMmd1wz41hd5T7xA/viewform"
 
 # Additional content in the sidebar
-st.sidebar.header("Cliquez sur Rapport pour Commencer")
+st.sidebar.header("Cliquez Ici")
 
 # Create a hyperlink to the Google Form
-st.sidebar.markdown(f"[Boulanger Rapport]({google_form_url})")
+st.sidebar.markdown(f"[ :baguette_bread: Boulanger Rapport]({google_form_url})")
 
 
 #st.sidebar.text("This is additional content in the sidebar.")
