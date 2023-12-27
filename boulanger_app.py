@@ -68,8 +68,5 @@ if submit_button:
 
     st.success("Data updated successfully.")
     
-    # Rerun the app after submission
-    st.experimental_rerun()
-
     # Set values to zero after submission
     st.session_state.mat_values = {mat: 0 for mat in mat_options}
