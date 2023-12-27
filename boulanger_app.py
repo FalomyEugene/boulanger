@@ -67,3 +67,6 @@ if st.sidebar.button("Submit"):
 # Check rerun flag and rerun the app if necessary
 if st.session_state.rerun:
     st.experimental_rerun()
+
+#Stop the app
+st.stop()
