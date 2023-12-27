@@ -3,6 +3,7 @@ import gspread as gs
 from google.oauth2 import service_account
 import streamlit as st
 from datetime import datetime
+import json
 
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets',
@@ -51,6 +52,9 @@ for mat in selected_mat:
 
 # Prepare data to be updated
 data_to_update = [date] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
+
+# Print the data_to_update to check its content
+st.write("Data to update:", data_to_update)
 
 # Update the worksheet with the new row
 worksheet.append_row(data_to_update)
