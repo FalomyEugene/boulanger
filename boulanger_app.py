@@ -40,7 +40,7 @@ date_str = date.strftime("%Y-%m-%d")
 # Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Excell", "Autre"]
 
-# Loop through each material and create an input field for its value
+# Create a dictionary to store the values for each selected material
 mat_values = {}
 for mat in mat_options:
     value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
@@ -55,3 +55,10 @@ if st.sidebar.button("Submit"):
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
+
+    # Clear the input fields (set values to 0) after submitting
+    mat_values = {mat: 0 for mat in mat_options}
+
+# Display the input fields in the sidebar
+for mat in mat_options:
+    mat_values[mat] = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=mat_values.get(mat, 0))
