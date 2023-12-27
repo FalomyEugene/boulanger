@@ -36,27 +36,20 @@ mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "E
 # Initialize session state
 if "mat_values" not in st.session_state:
     st.session_state.mat_values = {mat: 0 for mat in mat_options}
-    st.session_state.submitted = False
 
-# Loop through each material and create an input field for its value
-for mat in mat_options:
-    # Use st.number_input to display the value
-    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values[mat])
-    st.session_state.mat_values[mat] = value
+# Use st.form to create a form context
+with st.sidebar.form("my_form"):
+    # Loop through each material and create an input field for its value
+    for mat in mat_options:
+        # Use st.number_input to display the value
+        value = st.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values[mat])
+        st.session_state.mat_values[mat] = value
 
-# Display the current values on the sidebar
-st.sidebar.write("Current values:")
-for mat in mat_options:
-    st.sidebar.write(f"{mat}: {st.session_state.mat_values[mat]}")
-
-# Add a custom submit button
-if st.sidebar.button("Submit"):
-    # Set values to zero before updating
-    st.session_state.mat_values = {mat: 0 for mat in mat_options}
-    st.session_state.submitted = True
+    # Add a custom submit button
+    submitted = st.form_submit_button("Submit")
 
 # Check if submitted and rerun the app
-if st.session_state.submitted:
+if submitted:
     # Prepare data to be updated
     data_to_update = [date_str] + [st.session_state.mat_values.get(mat, 0) for mat in mat_options]
 
@@ -64,4 +57,3 @@ if st.session_state.submitted:
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
-    st.experimental_rerun()
