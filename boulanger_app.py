@@ -70,4 +70,4 @@ if submit_button:
     # Set values to zero after submission
     st.session_state.mat_values = {mat: 0 for mat in mat_options}
     # Rerun the app after submission
-    st.experimental_rerun()
+    #st.experimental_rerun()
