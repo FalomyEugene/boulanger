@@ -45,10 +45,11 @@ if "mat_values" not in st.session_state:
     st.session_state.mat_values = {}
     st.session_state.rerun = False
 
-# Loop through each material and create an input field for its value
+## Loop through each material and create an input field for its value
 for mat in mat_options:
-    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values.get(mat, 0))
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=f"{mat}_input", value=st.session_state.mat_values.get(mat, 0))
     st.session_state.mat_values[mat] = value
+
 
 # Add a submit button
 if st.sidebar.button("Submit"):
@@ -64,8 +65,8 @@ if st.sidebar.button("Submit"):
     # Stop the app after submission
     st.stop()
 
-# Loop through each material and create an input field for its value
-for mat in mat_options:
-    value = st.sidebar.number_input(f"Enter value for {mat}", key=f"{mat}_input", value=st.session_state.mat_values.get(mat, 0))
-    st.session_state.mat_values[mat] = value
-
+# Display the input fields in the sidebar only after submission
+if st.session_state.rerun:
+    for mat in mat_options:
+        value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values.get(mat, 0))
+        st.session_state.mat_values[mat] = value
