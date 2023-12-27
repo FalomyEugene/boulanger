@@ -38,7 +38,7 @@ date = st.sidebar.date_input("Date", datetime.now())
 date_str = date.strftime("%Y-%m-%d")
 
 # Define the materials
-mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Excell", "Sel", "Autre"]
+mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Excell", "Autre"]
 
 # Multiselect for selecting the mat
 selected_mat = st.sidebar.multiselect("Select the mat:", mat_options, key="selected_mat")
