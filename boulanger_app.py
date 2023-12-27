@@ -43,7 +43,9 @@ mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "E
 # Create a dictionary to store the values for each selected material
 mat_values = {}
 for mat in mat_options:
-    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
+    # Use unique key for each widget
+    key = f"{mat}_input"
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=key, value=mat_values.get(mat, 0))
     mat_values[mat] = value
 
 # Add a submit button
@@ -61,4 +63,6 @@ if st.sidebar.button("Submit"):
 
 # Display the input fields in the sidebar
 for mat in mat_options:
-    mat_values[mat] = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=mat_values.get(mat, 0))
+    # Use unique key for each widget
+    key = f"{mat}_input"
+    mat_values[mat] = st.sidebar.number_input(f"Enter value for {mat}", key=key, value=mat_values.get(mat, 0))
