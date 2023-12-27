@@ -43,7 +43,6 @@ mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "E
 # Initialize session state
 if "mat_values" not in st.session_state:
     st.session_state.mat_values = {}
-    st.session_state.rerun = False
 
 # Loop through each material and create an input field for its value
 for mat in mat_options:
@@ -59,9 +58,8 @@ if st.sidebar.button("Submit"):
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
-    # Set rerun flag to True
-    st.session_state.rerun = True
+    # Stop the app
+    st.script_runner.report_thread.stop()
 
-# Check rerun flag and rerun the app if necessary
-if st.session_state.rerun:
-    st.experimental_rerun()
+# Display the values
+st.write("Values after submission:", st.session_state.mat_values)
