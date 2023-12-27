@@ -47,8 +47,13 @@ if "mat_values" not in st.session_state:
 # Loop through each material and create an input field for its value
 for mat in mat_options:
     # Use st.number_input to display the value
-    value = st.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values[mat])
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values[mat])
     st.session_state.mat_values[mat] = value
+
+# Display the current values on the sidebar
+st.sidebar.write("Current values:")
+for mat in mat_options:
+    st.sidebar.write(f"{mat}: {st.session_state.mat_values[mat]}")
 
 # Add a custom submit button
 if st.sidebar.button("Submit"):
@@ -61,6 +66,3 @@ if st.sidebar.button("Submit"):
     st.success("Data updated successfully.")
     # Set values to zero after submission
     st.session_state.mat_values = {mat: 0 for mat in mat_options}
-
-# Display the values
-st.write("Current values:", st.session_state.mat_values)
