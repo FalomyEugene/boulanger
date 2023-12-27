@@ -45,11 +45,11 @@ with st.sidebar.form("my_form"):
         value = st.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values[mat])
         st.session_state.mat_values[mat] = value
 
-    # Add a custom submit button
-    submitted = st.form_submit_button("Submit")
+   # Add a custom submit button with on_click method
+submit_button = st.sidebar.button("Submit")
 
-# Check if submitted and rerun the app
-if submitted:
+# Use on_click method to set values to zero after submission
+if submit_button:
     # Prepare data to be updated
     data_to_update = [date_str] + [st.session_state.mat_values.get(mat, 0) for mat in mat_options]
 
@@ -57,4 +57,8 @@ if submitted:
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
+    # Set values to zero after submission
+    st.session_state.mat_values = {mat: 0 for mat in mat_options}
+
+    # Rerun the app after submission
     st.experimental_rerun()
