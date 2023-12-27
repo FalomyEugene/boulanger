@@ -35,6 +35,10 @@ st.sidebar.header("Rapportez Ici:")
 
 # Get input data from user
 date = st.sidebar.date_input("Date", datetime.now())
+# Convert date to a string
+date_str = date.strftime("%Y-%m-%d")
+
+
 
 # Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Autre"]
@@ -51,10 +55,9 @@ for mat in selected_mat:
     mat_values[mat] = value
 
 # Prepare data to be updated
-data_to_update = [date] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
+# Prepare data to be updated
+data_to_update = [date_str] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
 
-# Print the data_to_update to check its content
-st.write("Data to update:", data_to_update)
 
 # Update the worksheet with the new row
 worksheet.append_row(data_to_update)
