@@ -52,8 +52,8 @@ for mat in mat_options:
 
 # Display the current values on the sidebar
 st.sidebar.write("Current values:")
-for mat in mat_options:
-    st.sidebar.write(f"{mat}: {st.session_state.mat_values[mat]}")
+#for mat in mat_options:
+ #   st.sidebar.write(f"{mat}: {st.session_state.mat_values[mat]}")
 
 # Add a custom submit button with on_click method
 submit_button = st.sidebar.button("Submit")
