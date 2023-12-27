@@ -61,12 +61,11 @@ if st.sidebar.button("Submit"):
     st.success("Data updated successfully.")
     # Clear the selected materials
     st.session_state.mat_values = {mat: 0 for mat in mat_options}
-    # Set rerun flag to True
-    st.session_state.rerun = True
+    # Stop the app after submission
+    st.stop()
 
-# Check rerun flag and rerun the app if necessary
-#if st.session_state.rerun:
-    st.experimental_rerun()
-
-#Stop the app
-st.stop()
+# Display the input fields in the sidebar only after submission
+if st.session_state.rerun:
+    for mat in mat_options:
+        value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values.get(mat, 0))
+        st.session_state.mat_values[mat] = value
