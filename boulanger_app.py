@@ -57,3 +57,4 @@ if submitted:
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
+    st.experimental_rerun()
