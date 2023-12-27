@@ -67,7 +67,9 @@ if submit_button:
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
-    # Set values to zero after submission
-    st.session_state.mat_values = {mat: 0 for mat in mat_options}
+    
     # Rerun the app after submission
     st.experimental_rerun()
+
+    # Set values to zero after submission
+    st.session_state.mat_values = {mat: 0 for mat in mat_options}
