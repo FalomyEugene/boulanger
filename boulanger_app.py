@@ -62,4 +62,4 @@ if st.sidebar.button("Submit"):
     st.success("Data updated successfully.")
     
  # Clear the selected materials and rerun the app to hide them
- st.experimental_rerun()
+st.experimental_rerun()
