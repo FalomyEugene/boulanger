@@ -18,12 +18,12 @@ client = gs.authorize(credentials)
 
 
 sheet = client.open('Test1')
-edutech_data = sheet.get_worksheet(1)
-edutech_data = edutech_data.get_all_records()
+sheet = sheet.get_worksheet(1)
+sheet = sheet.get_all_records()
 # edutech_data
 
-edutech_df = pd.DataFrame.from_dict(edutech_data)
-st.write(edutech_df.head(3))
+sheet = pd.DataFrame.from_dict(sheet)
+st.write(sheet.head(3))
  #edutech_df.head(3)
 # print(edutech_df)
 
@@ -59,8 +59,6 @@ for mat in selected_mat:
 data_to_update = [date] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
 
 # Update Google Sheet
-sheet_name = 'Test1'  # Replace with your actual sheet name
-sheet = client.open(sheet_name).sheet2
 sheet.append_row(data_to_update)
 
 st.success("Data updated successfully.")
