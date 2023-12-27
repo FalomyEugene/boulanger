@@ -55,8 +55,11 @@ st.sidebar.write("Current values:")
 for mat in mat_options:
     st.sidebar.write(f"{mat}: {st.session_state.mat_values[mat]}")
 
-# Add a custom submit button
-if st.sidebar.button("Submit"):
+# Add a custom submit button with on_click method
+submit_button = st.sidebar.button("Submit")
+
+# Use on_click method to set values to zero after submission
+if submit_button:
     # Prepare data to be updated
     data_to_update = [date_str] + [st.session_state.mat_values.get(mat, 0) for mat in mat_options]
 
