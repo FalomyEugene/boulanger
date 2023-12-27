@@ -46,7 +46,8 @@ if "mat_values" not in st.session_state:
 
 # Loop through each material and create an input field for its value
 for mat in mat_options:
-    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values[mat])
+    # Use st.number_input to display the value
+    value = st.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values[mat])
     st.session_state.mat_values[mat] = value
 
 # Add a custom submit button
@@ -58,7 +59,7 @@ if st.sidebar.button("Submit"):
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
-    # Reset values after submission
+    # Set values to zero after submission
     st.session_state.mat_values = {mat: 0 for mat in mat_options}
 
 # Display the values
