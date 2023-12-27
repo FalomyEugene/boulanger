@@ -3,7 +3,6 @@ import gspread as gs
 from google.oauth2 import service_account
 import streamlit as st
 from datetime import datetime
-import json
 
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets',
@@ -38,8 +37,6 @@ date = st.sidebar.date_input("Date", datetime.now())
 # Convert date to a string
 date_str = date.strftime("%Y-%m-%d")
 
-
-
 # Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Autre"]
 
@@ -54,12 +51,12 @@ for mat in selected_mat:
     value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
     mat_values[mat] = value
 
-# Prepare data to be updated
-# Prepare data to be updated
-data_to_update = [date_str] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
+# Add a submit button
+if st.sidebar.button("Submit"):
+    # Prepare data to be updated
+    data_to_update = [date_str] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
 
+    # Update the worksheet with the new row
+    worksheet.append_row(data_to_update)
 
-# Update the worksheet with the new row
-worksheet.append_row(data_to_update)
-
-st.success("Data updated successfully.")
+    st.success("Data updated successfully.")
