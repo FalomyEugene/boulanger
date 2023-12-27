@@ -40,18 +40,16 @@ date_str = date.strftime("%Y-%m-%d")
 # Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Excell", "Autre"]
 
-# Select material from the list
-selected_mat = st.sidebar.selectbox("Select the mat:", mat_options)
-
-# Input for the selected material
-value = st.sidebar.number_input(f"Enter value for {selected_mat}", key=selected_mat)
+# Loop through each material and create an input field for its value
+mat_values = {}
+for mat in mat_options:
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
+    mat_values[mat] = value
 
 # Add a submit button
 if st.sidebar.button("Submit"):
     # Prepare data to be updated
-    data_to_update = [date_str] + [0] * len(mat_options)  # Initialize with zeros
-    index = mat_options.index(selected_mat)
-    data_to_update[index + 1] = value  # Add 1 to account for the "Date" column
+    data_to_update = [date_str] + [mat_values.get(mat, 0) for mat in mat_options]
 
     # Update the worksheet with the new row
     worksheet.append_row(data_to_update)
