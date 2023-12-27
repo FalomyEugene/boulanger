@@ -16,7 +16,7 @@ credentials = service_account.Credentials.from_service_account_file(
 client = gs.authorize(credentials)
 
 # Open the second worksheet
-worksheet = client.open('Test1').get_worksheet(1)
+worksheet = client.open('Test1').get_worksheet(0)
 
 # Get all records from the worksheet
 records = worksheet.get_all_records()
@@ -32,15 +32,15 @@ st.markdown("##")
 
 # ---- SIDEBAR ----
 
-st.title("Link to Google Form in Streamlit App")
-
 # Replace 'YOUR_GOOGLE_FORM_URL' with the actual URL of your Google Form
 google_form_url = "https://docs.google.com/forms/d/e/1FAIpQLSfw0wN0hundqYfBytzI_P1KBG5MrTsdwlAMmd1wz41hd5T7xA/viewform"
 
 # Create a hyperlink to the Google Form
-st.markdown(f"[Open Google Form]({google_form_url})")
+st.sidebar.markdown(f"[Open Google Form]({google_form_url})")
+
+# Additional content in the sidebar
+st.sidebar.header("Additional Content")
+st.sidebar.text("This is additional content in the sidebar.")
 
 # Rest of your Streamlit app
 # ...
-
-
