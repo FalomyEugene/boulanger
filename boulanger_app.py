@@ -36,11 +36,11 @@ st.markdown("##")
 google_form_url = "https://docs.google.com/forms/d/e/1FAIpQLSfw0wN0hundqYfBytzI_P1KBG5MrTsdwlAMmd1wz41hd5T7xA/viewform"
 
 # Create a hyperlink to the Google Form
-st.sidebar.markdown(f"[Open Google Form]({google_form_url})")
+st.sidebar.markdown(f"[Cliquez Ici]({google_form_url})")
 
 # Additional content in the sidebar
 st.sidebar.header("Additional Content")
-st.sidebar.text("This is additional content in the sidebar.")
+#st.sidebar.text("This is additional content in the sidebar.")
 
 # Rest of your Streamlit app
 # ...
