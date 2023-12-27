@@ -40,22 +40,33 @@ date_str = date.strftime("%Y-%m-%d")
 # Define the materials
 mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "Excell", "Autre"]
 
+# Initialize session state
+session_state = st.session_state.setdefault(mat_values={}, rerun=False)
+
 # Loop through each material and create an input field for its value
-mat_values = {}
 for mat in mat_options:
-    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
-    mat_values[mat] = value
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=session_state.mat_values.get(mat, 0))
+    session_state.mat_values[mat] = value
 
 # Add a submit button
 if st.sidebar.button("Submit"):
     # Prepare data to be updated
-    data_to_update = [date_str] + [mat_values.get(mat, 0) for mat in mat_options]
+    data_to_update = [date_str] + [session_state.mat_values.get(mat, 0) for mat in mat_options]
 
     # Update the worksheet with the new row
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
     # Clear the selected materials
-    mat_values = {mat: 0 for mat in mat_options}
-    # Rerun the app to hide the selected materials
+    session_state.mat_values = {mat: 0 for mat in mat_options}
+    # Set rerun flag to True
+    session_state.rerun = True
+
+# Check rerun flag and rerun the app if necessary
+if session_state.rerun:
     st.experimental_rerun()
+
+# Display the input fields in the sidebar
+for mat in mat_options:
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=session_state.mat_values.get(mat, 0))
+    session_state.mat_values[mat] = value
