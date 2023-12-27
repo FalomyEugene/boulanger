@@ -42,14 +42,14 @@ mat_options = ["Farine", "Mantegue", "Bois", "Gaz", "Sucre", "Ledvin", "Sel", "E
 
 # Initialize session state
 if "mat_values" not in st.session_state:
-    st.session_state.mat_values = {}
+    st.session_state.mat_values = {mat: 0 for mat in mat_options}
 
 # Loop through each material and create an input field for its value
 for mat in mat_options:
-    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values.get(mat, 0))
+    value = st.sidebar.number_input(f"Enter value for {mat}", key=mat, value=st.session_state.mat_values[mat])
     st.session_state.mat_values[mat] = value
 
-# Add a submit button
+# Add a custom submit button
 if st.sidebar.button("Submit"):
     # Prepare data to be updated
     data_to_update = [date_str] + [st.session_state.mat_values.get(mat, 0) for mat in mat_options]
@@ -58,9 +58,8 @@ if st.sidebar.button("Submit"):
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
-    # Display the values
-    st.write("Values after submission:", st.session_state.mat_values)
+    # Reset values after submission
+    st.session_state.mat_values = {mat: 0 for mat in mat_options}
 
-    # Add a custom stop button
-    if st.button("Stop App"):
-        st.stop()
+# Display the values
+st.write("Current values:", st.session_state.mat_values)
