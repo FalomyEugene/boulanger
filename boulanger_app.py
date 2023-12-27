@@ -55,3 +55,5 @@ if st.sidebar.button("Submit"):
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
+    # Clear the selected materials and rerun the app to hide them
+    st.experimental_rerun()
