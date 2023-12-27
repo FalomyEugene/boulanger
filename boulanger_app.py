@@ -55,5 +55,7 @@ if st.sidebar.button("Submit"):
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
-    # Clear the selected materials and rerun the app to hide them
+    # Clear the selected materials
+    mat_values = {mat: 0 for mat in mat_options}
+    # Rerun the app to hide the selected materials
     st.experimental_rerun()
