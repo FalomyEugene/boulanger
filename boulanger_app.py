@@ -59,9 +59,9 @@ for mat in selected_mat:
 data_to_update = [date] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
 
 # Update Google Sheet
-sheet_name = 'Test1'  # Replace with your actual sheet name
-sheet = client.open(sheet_name).sheet2
-sheet.append_row(data_to_update)
+#sheet_name = 'Test1'  # Replace with your actual sheet name
+#sheet = client.open(sheet_name).sheet2
+edutech_data.append_row(data_to_update)
 
 st.success("Data updated successfully.")
 
