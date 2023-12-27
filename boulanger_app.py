@@ -58,8 +58,9 @@ if st.sidebar.button("Submit"):
     worksheet.append_row(data_to_update)
 
     st.success("Data updated successfully.")
-    # Stop the app
-    st.script_runner.report_thread.stop()
+    # Display the values
+    st.write("Values after submission:", st.session_state.mat_values)
 
-# Display the values
-st.write("Values after submission:", st.session_state.mat_values)
+    # Add a custom stop button
+    if st.button("Stop App"):
+        st.stop()
