@@ -23,7 +23,7 @@ edutech_data = edutech_data.get_all_records()
 # edutech_data
 
 edutech_df = pd.DataFrame.from_dict(edutech_data)
-st.write(edutech_df.head(3))
+#st.write(edutech_df.head(3))
 # edutech_df.head(3)
 # print(edutech_df)
 
@@ -55,21 +55,13 @@ for mat in selected_mat:
     value = st.sidebar.number_input(f"Enter value for {mat}", key=mat)
     mat_values[mat] = value
 
-
-
 # Prepare data to be updated
-data_to_update = [date, farine, mantegue, bois, gaz, sucre, ledvin, sel]
+data_to_update = [date] + [mat_values.get(mat, 0) for mat in mat_options[:-1]]
 
 # Update Google Sheet
+sheet_name = 'Test1'  # Replace with your actual sheet name
+sheet = client.open(sheet_name).sheet2
 sheet.append_row(data_to_update)
 
 st.success("Data updated successfully.")
-
-current_date_time = datetime.now()
-# Format the date as a string
-formatted_date = current_date_time.strftime("%Y-%m-%d %H:%M:%S")
-# Display the date in your Streamlit app
-st.write("Last Updated:", formatted_date)
-
-
 
