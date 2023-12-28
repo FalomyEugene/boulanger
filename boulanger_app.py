@@ -53,8 +53,14 @@ total_sales = df[numeric_columns].sum(axis=1)
 
 left_column, middle_column, right_column = st.columns(3)
 with left_column:
-    st.subheader("Total Sales:")
-    st.subheader(f"US $ {total_sales:,}")
+    # Format total_sales only if it's a numeric value, otherwise display as is
+    formatted_total_sales = f"US $ {total_sales.sum():,}" if total_sales.dtype in ['int64', 'float64'] else total_sales.sum()
+
+    # Display the formatted total sales
+    st.subheader(f"Total Sales: {formatted_total_sales}")
+
+   # st.subheader("Total Sales:")
+   # st.subheader(f"US $ {total_sales:,}")
 
 st.markdown("""---""")
 
