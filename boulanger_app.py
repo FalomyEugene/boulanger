@@ -51,8 +51,8 @@ df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'], 
 
 # Filter DataFrame based on the selected date range
 filtered_df = df[
-    (df['1. Date du compte rendu?'].dt.floor("D") >= start_date) & 
-    (df['1. Date du compte rendu?'].dt.floor("D") <= end_date)
+    (df['1. Date du compte rendu?'].dt >= pd.to_datetime(start_date)) & 
+    (df['1. Date du compte rendu?'].dt <= pd.to_datetime(end_date))
 ]
 
 # Display the filtered DataFrame
