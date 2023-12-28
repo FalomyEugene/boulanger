@@ -28,7 +28,7 @@ st.write(df.head(3))
 
 # ---- MAINPAGE ----
 
-st.title(":bar_chart: Rapport - hebdomadaire")
+st.title(":bar_chart: Boulangerie Rapport De Vente")
 st.markdown("##")
 
 # ---- SIDEBAR ----
