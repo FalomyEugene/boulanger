@@ -46,13 +46,10 @@ st.sidebar.markdown(f"[ Boulanger Rapport]({google_form_url})")
 start_date = st.sidebar.date_input("Select Start Date", datetime.now() - timedelta(days=7))
 end_date = st.sidebar.date_input("Select End Date", datetime.now())
 
-# Convert the date column to datetime if it's stored as a string
-df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'], errors='coerce')
-
 # Filter DataFrame based on the selected date range
 filtered_df = df[
-    (df['1. Date du compte rendu?'].dt >= pd.to_datetime(start_date)) & 
-    (df['1. Date du compte rendu?'].dt <= pd.to_datetime(end_date))
+    (df['1. Date du compte rendu?'] >= start_date) & 
+    (df['1. Date du compte rendu?'] <= end_date)
 ]
 
 # Display the filtered DataFrame
