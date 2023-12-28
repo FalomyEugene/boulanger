@@ -26,6 +26,9 @@ records = worksheet.get_all_records()
 # Convert records to a DataFrame
 df = pd.DataFrame.from_dict(records)
 
+# Convert the '1. Date du compte rendu?' column to Pandas Timestamp
+df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'])
+
 # ---- MAINPAGE ----
 
 st.title(":bar_chart: Boulangerie Rapport De Vente")
@@ -48,8 +51,8 @@ end_date = st.sidebar.date_input("Select End Date", datetime.now())
 
 # Filter DataFrame based on the selected date range
 filtered_df = df[
-    (df['1. Date du compte rendu?'] >= start_date) & 
-    (df['1. Date du compte rendu?'] <= end_date)
+    (df['1. Date du compte rendu?'].dt.date >= start_date.date()) &
+    (df['1. Date du compte rendu?'].dt.date <= end_date.date())
 ]
 
 # Display the filtered DataFrame
