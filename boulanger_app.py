@@ -50,10 +50,7 @@ start_date = st.sidebar.date_input("Select Start Date", datetime.now() - timedel
 end_date = st.sidebar.date_input("Select End Date", datetime.now())
 
 # Filter DataFrame based on the selected date range
-filtered_df = df[
-    (df['1. Date du compte rendu?'].dt >= start_date) &
-    (df['1. Date du compte rendu?'].dt <= end_date)
-]
+filtered_df = df[df['1. Date du compte rendu?'].between(start_date, end_date)]
 
 # Display the filtered DataFrame
 st.write(filtered_df)
