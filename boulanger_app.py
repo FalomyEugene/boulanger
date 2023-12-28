@@ -45,5 +45,16 @@ st.sidebar.markdown(f"[ Boulanger Rapport]({google_form_url})")
 
 #st.sidebar.text("This is additional content in the sidebar.")
 
+
+# ---- HIDE STREAMLIT STYLE ----
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 # Rest of your Streamlit app
 # ...
