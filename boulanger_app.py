@@ -50,7 +50,10 @@ end_date = st.sidebar.date_input("Select End Date", datetime.now())
 df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'], errors='coerce')
 
 # Filter DataFrame based on the selected date range
-filtered_df = df[(df['1. Date du compte rendu?'].dt.date >= start_date.date()) & (df['1. Date du compte rendu?'].dt.date <= end_date.date())]
+filtered_df = df[
+    (df['1. Date du compte rendu?'].dt.floor("D") >= start_date) & 
+    (df['1. Date du compte rendu?'].dt.floor("D") <= end_date)
+]
 
 # Display the filtered DataFrame
 st.write(filtered_df)
