@@ -25,7 +25,6 @@ records = worksheet.get_all_records()
 
 # Convert records to a DataFrame
 df = pd.DataFrame.from_dict(records)
-st.write(df.head(3))
 
 # ---- MAINPAGE ----
 
@@ -56,8 +55,8 @@ filtered_df = df[df['1. Date du compte rendu?'].dt.date == pd.to_datetime(select
 st.write(filtered_df)
 
 # TOP KPI's
-numeric_columns = df.select_dtypes(include='number').columns
-total_sales = df[numeric_columns].sum(axis=1)
+numeric_columns = filtered_df.select_dtypes(include='number').columns
+total_sales = filtered_df[numeric_columns].sum(axis=1)
 
 left_column, middle_column, right_column = st.columns(3)
 with left_column:
