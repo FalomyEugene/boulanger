@@ -42,6 +42,15 @@ st.sidebar.header(":baguette_bread: Cliquez Ici :baguette_bread:")
 # Create a hyperlink to the Google Form
 st.sidebar.markdown(f"[ Boulanger Rapport]({google_form_url})")
 
+# Add a date filter in the sidebar
+selected_date = st.sidebar.date_input("Select Date", datetime.now())
+
+# Filter DataFrame based on the selected date
+filtered_df = df[df['1. Date du compte rendu?'].dt.date == selected_date.date()]
+
+# Display the filtered DataFrame
+st.write(filtered_df)
+
 
 #st.sidebar.text("This is additional content in the sidebar.")
 
