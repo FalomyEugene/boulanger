@@ -2,7 +2,7 @@ import pandas as pd
 import gspread as gs
 from google.oauth2 import service_account
 import streamlit as st
-from datetime import datetime
+from datetime import datetime, timedelta
 
 st.set_page_config(page_title="Boulanger Rapport", page_icon=":bar_chart:", layout="wide")
 
@@ -42,14 +42,14 @@ st.sidebar.header(":baguette_bread: Cliquez Ici :baguette_bread:")
 # Create a hyperlink to the Google Form
 st.sidebar.markdown(f"[ Boulanger Rapport]({google_form_url})")
 
-# Add a date filter in the sidebar
-selected_date = st.sidebar.date_input("Select Date", datetime.now())
+# Add a date range filter in the sidebar
+date_range = st.sidebar.date_input("Select Date Range", [datetime.now() - timedelta(days=7), datetime.now()], type="daterange")
 
 # Convert the date column to datetime if it's stored as a string
 df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'], errors='coerce')
 
-# Filter DataFrame based on the selected date
-filtered_df = df[df['1. Date du compte rendu?'].dt.date == pd.to_datetime(selected_date).date()]
+# Filter DataFrame based on the selected date range
+filtered_df = df[(df['1. Date du compte rendu?'].dt.date >= date_range[0].date()) & (df['1. Date du compte rendu?'].dt.date <= date_range[1].date())]
 
 # Display the filtered DataFrame
 st.write(filtered_df)
