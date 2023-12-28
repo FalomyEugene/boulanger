@@ -43,13 +43,14 @@ st.sidebar.header(":baguette_bread: Cliquez Ici :baguette_bread:")
 st.sidebar.markdown(f"[ Boulanger Rapport]({google_form_url})")
 
 # Add a date range filter in the sidebar
-date_range = st.sidebar.date_input("Select Date Range", [datetime.now() - timedelta(days=7), datetime.now()], type="daterange")
+start_date = st.sidebar.date_input("Select Start Date", datetime.now() - timedelta(days=7))
+end_date = st.sidebar.date_input("Select End Date", datetime.now())
 
 # Convert the date column to datetime if it's stored as a string
 df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'], errors='coerce')
 
 # Filter DataFrame based on the selected date range
-filtered_df = df[(df['1. Date du compte rendu?'].dt.date >= date_range[0].date()) & (df['1. Date du compte rendu?'].dt.date <= date_range[1].date())]
+filtered_df = df[(df['1. Date du compte rendu?'].dt.date >= start_date.date()) & (df['1. Date du compte rendu?'].dt.date <= end_date.date())]
 
 # Display the filtered DataFrame
 st.write(filtered_df)
