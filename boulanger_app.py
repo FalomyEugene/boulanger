@@ -61,7 +61,7 @@ total_sales = filtered_df[numeric_columns].sum(axis=1)
 
 left_column, middle_column, right_column = st.columns(3)
 with left_column:
-    formatted_total_sales = f"US ht {total_sales.sum():,}" if total_sales.dtype in ['int64', 'float64'] else total_sales.sum()
+    formatted_total_sales = f"HT {total_sales.sum():,}" if total_sales.dtype in ['int64', 'float64'] else total_sales.sum()
     st.subheader("Total Sales:")
     st.write(formatted_total_sales)
 
