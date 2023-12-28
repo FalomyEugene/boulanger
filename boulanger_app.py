@@ -3,6 +3,7 @@ import gspread as gs
 from google.oauth2 import service_account
 import streamlit as st
 from datetime import datetime
+st.set_page_config(page_title="Boulanger Rapport", page_icon=":bar_chart:", layout="wide")
 
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets',
