@@ -31,9 +31,9 @@ df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'])
 
 
 # getting the employee info
-employee = client.open('Test1').get_worksheeet(1)
-records1 = employee.get_all_records()
-df1 = pd.DataFrame.from_dict(records1)
+# employee = client.open('Test1').get_worksheeet(1)
+# records1 = employee.get_all_records()
+# df1 = pd.DataFrame.from_dict(records1)
 
 # ---- MAINPAGE ----
 
