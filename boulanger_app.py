@@ -108,7 +108,8 @@ fig_monthly_sales.update_layout(
     yaxis=(dict(showgrid=False)),
 )
 
-
+# Show the plot
+st.plotly_chart(fig_monthly_sales, include_plotlyjs=False)
 
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
@@ -119,5 +120,6 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+
 
 # Rest of your Streamlit app
