@@ -29,6 +29,12 @@ df = pd.DataFrame.from_dict(records)
 # Convert the '1. Date du compte rendu?' column to Pandas Timestamp
 df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'])
 
+
+# getting the employee info
+employee = client.open('Test1').get_worksheeet(1)
+records1 = employee.get_all_records()
+df1 = pd.DataFrame.from_dict(records1)
+
 # ---- MAINPAGE ----
 
 st.title(":bar_chart: Boulangerie Rapport De Vente")
@@ -66,6 +72,7 @@ with left_column:
     # Increase font size using HTML-style tags
     st.subheader("Total Sales:")
     st.markdown(f"<p style='font-size: 24px;'>{formatted_total_sales}</p>", unsafe_allow_html=True)
+
 
 # with left_column:
 #     formatted_total_sales = f"HT {total_sales.sum():,}" if total_sales.dtype in ['int64', 'float64'] else total_sales.sum()
