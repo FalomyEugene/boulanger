@@ -83,10 +83,10 @@ with left_column:
 st.markdown("""---""")
 
 
-# Assuming your DataFrame has a datetime column named 'Timestamp'
+# Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
 df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
 
-# Extract month from the 'Timestamp' column
+# Extract month from the 'Date du compte rendu?' column
 df['Month'] = df['Date du compte rendu?'].dt.month_name()
 
 # Group by month and sum the 'Total' sales
@@ -96,7 +96,7 @@ sales_by_month = df.groupby(by=["Month"])[["total_sales"]].sum().reset_index()
 fig_monthly_sales = px.bar(
     sales_by_month,
     x="Month",
-    y="Total",
+    y="total_sales",
     title="<b>Sales by Month</b>",
     color_discrete_sequence=["#0083B8"] * len(sales_by_month),
     template="plotly_white",
@@ -107,11 +107,6 @@ fig_monthly_sales.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",
     yaxis=(dict(showgrid=False)),
 )
-
-# Show the plot
-fig_monthly_sales.show()
-
-
 
 
 
