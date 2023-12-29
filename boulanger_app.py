@@ -26,8 +26,8 @@ records = worksheet.get_all_records()
 # Convert records to a DataFrame
 df = pd.DataFrame.from_dict(records)
 
-# Convert the '1. Date du compte rendu?' column to Pandas Timestamp
-df['1. Date du compte rendu?'] = pd.to_datetime(df['1. Date du compte rendu?'])
+# Convert the 'Date du compte rendu?' column to Pandas Timestamp
+df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
 
 
 # getting the employee info
@@ -56,7 +56,7 @@ start_date = pd.to_datetime(st.sidebar.date_input("Select Start Date", datetime.
 end_date = pd.to_datetime(st.sidebar.date_input("Select End Date", datetime.now()))
 
 # Filter DataFrame based on the selected date range
-filtered_df = df[df['1. Date du compte rendu?'].between(start_date, end_date)]
+filtered_df = df[df['Date du compte rendu?'].between(start_date, end_date)]
 
 # Display the filtered DataFrame
 st.write(filtered_df)
