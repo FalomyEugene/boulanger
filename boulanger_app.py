@@ -3,7 +3,7 @@ import gspread as gs
 from google.oauth2 import service_account
 import streamlit as st
 from datetime import datetime, timedelta
-#import plotly.express as px
+import plotly.express as px
 
 st.set_page_config(page_title="Boulanger Rapport", page_icon=":bar_chart:", layout="wide")
 
@@ -30,11 +30,6 @@ df = pd.DataFrame.from_dict(records)
 # Convert the 'Date du compte rendu?' column to Pandas Timestamp
 df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
 
-
-# getting the employee info
-# employee = client.open('Test1').get_worksheeet(1)
-# records1 = employee.get_all_records()
-# df1 = pd.DataFrame.from_dict(records1)
 
 # ---- MAINPAGE ----
 
@@ -74,14 +69,7 @@ with left_column:
     st.subheader("Total Sales:")
     st.markdown(f"<p style='font-size: 24px;'>{formatted_total_sales}</p>", unsafe_allow_html=True)
 
-
-# with left_column:
-#     formatted_total_sales = f"HT {total_sales.sum():,}" if total_sales.dtype in ['int64', 'float64'] else total_sales.sum()
-#     st.subheader("Total Sales:")
-#     st.write(formatted_total_sales)
-
 st.markdown("""---""")
-
 
 # Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
 df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
@@ -89,14 +77,18 @@ df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
 # Extract month from the 'Date du compte rendu?' column
 df['Month'] = df['Date du compte rendu?'].dt.month_name()
 
-# Group by month and sum the 'Total' sales
-sales_by_month = df.groupby(by=["Month"])[["total_sales"]].sum().reset_index()
+# Calculate total sales dynamically based on numeric columns
+numeric_columns = df.select_dtypes(include='number').columns
+df['Total Sales'] = df[numeric_columns].sum(axis=1)
+
+# Group by month and sum the 'Total Sales'
+sales_by_month = df.groupby(by=["Month"])[["Total Sales"]].sum().reset_index()
 
 # Create a bar chart for sales by month
 fig_monthly_sales = px.bar(
     sales_by_month,
     x="Month",
-    y="total_sales",
+    y="Total Sales",
     title="<b>Sales by Month</b>",
     color_discrete_sequence=["#0083B8"] * len(sales_by_month),
     template="plotly_white",
@@ -109,7 +101,7 @@ fig_monthly_sales.update_layout(
 )
 
 # Show the plot
-st.plotly_chart(fig_monthly_sales, include_plotlyjs=False)
+st.plotly_chart(fig_monthly_sales, use_container_width=True)
 
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
@@ -121,5 +113,5 @@ hide_st_style = """
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-
 # Rest of your Streamlit app
+# ...
