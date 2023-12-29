@@ -3,7 +3,7 @@ import gspread as gs
 from google.oauth2 import service_account
 import streamlit as st
 from datetime import datetime, timedelta
-import plotly.express as px
+import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Boulanger Rapport", page_icon=":bar_chart:", layout="wide")
 
@@ -84,24 +84,15 @@ df['Total Sales'] = df[numeric_columns].sum(axis=1)
 # Group by month and sum the 'Total Sales'
 sales_by_month = df.groupby(by=["Month"])[["Total Sales"]].sum().reset_index()
 
-# Create a bar chart for sales by month
-fig_monthly_sales = px.bar(
-    sales_by_month,
-    x="Month",
-    y="Total Sales",
-    title="<b>Sales by Month</b>",
-    color_discrete_sequence=["#0083B8"] * len(sales_by_month),
-    template="plotly_white",
-)
-
-fig_monthly_sales.update_layout(
-    xaxis=dict(tickmode="linear"),
-    plot_bgcolor="rgba(0,0,0,0)",
-    yaxis=(dict(showgrid=False)),
-)
+# Create a bar chart for sales by month using Matplotlib
+fig, ax = plt.subplots()
+ax.bar(sales_by_month["Month"], sales_by_month["Total Sales"], color='#0083B8')
+ax.set_title("Sales by Month")
+ax.set_xlabel("Month")
+ax.set_ylabel("Total Sales")
 
 # Show the plot
-st.plotly_chart(fig_monthly_sales, use_container_width=True)
+st.pyplot(fig)
 
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
