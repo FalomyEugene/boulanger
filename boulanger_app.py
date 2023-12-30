@@ -67,7 +67,11 @@ with left_column:
     st.subheader("Total Sales:")
     st.markdown(f"<p style='font-size: 24px;'>{formatted_total_sales}</p>", unsafe_allow_html=True)
 
-with middle_column:
+st.markdown("""---""")
+
+left_column, right_column = st.columns(2)
+
+with left_column:
     # Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
     df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
 
