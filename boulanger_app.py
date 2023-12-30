@@ -67,16 +67,14 @@ with left_column:
     st.subheader("Total Sales:")
     st.markdown(f"<p style='font-size: 24px;'>{formatted_total_sales}</p>", unsafe_allow_html=True)
     
-with right_column:
-    # Calculate average sales per day
-    benefice_column = "11. Benefice"  # Corrected column name with quotes
-    Benefice = filtered_df[benefice_column].sum(axis=0)
-    
-    # Display the total profit
-    st.subheader("Total Profit")
-    st.markdown(f"<p style='font-size: 24px;'>{Benefice}</p>", unsafe_allow_html=True)
+with middle_column:
+    # Calculate total profit
+    benefit_total = filtered_df["11. Benefice"].sum()
+    formatted_benefit_total = f"HT {benefit_total:,}"
 
-    
+    # Display the total profit
+    st.subheader("Total Profit:")
+    st.markdown(f"<p style='font-size: 24px;'>{formatted_benefit_total}</p>", unsafe_allow_html=True)
 
 st.markdown("""---""")
 
