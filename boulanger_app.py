@@ -1,9 +1,11 @@
+import matplotlib
+matplotlib.use("agg")
+import matplotlib.pyplot as plt
 import pandas as pd
 import gspread as gs
 from google.oauth2 import service_account
 import streamlit as st
 from datetime import datetime, timedelta
-import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Boulanger Rapport", page_icon=":bar_chart:", layout="wide")
 
