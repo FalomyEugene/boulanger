@@ -1,6 +1,3 @@
-import matplotlib
-matplotlib.use("agg")
-import matplotlib.pyplot as plt
 import pandas as pd
 import gspread as gs
 from google.oauth2 import service_account
@@ -31,7 +28,6 @@ df = pd.DataFrame.from_dict(records)
 
 # Convert the 'Date du compte rendu?' column to Pandas Timestamp
 df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
-
 
 # ---- MAINPAGE ----
 
@@ -86,15 +82,8 @@ df['Total Sales'] = df[numeric_columns].sum(axis=1)
 # Group by month and sum the 'Total Sales'
 sales_by_month = df.groupby(by=["Month"])[["Total Sales"]].sum().reset_index()
 
-# Create a bar chart for sales by month using Matplotlib
-fig, ax = plt.subplots()
-ax.bar(sales_by_month["Month"], sales_by_month["Total Sales"], color='#0083B8')
-ax.set_title("Sales by Month")
-ax.set_xlabel("Month")
-ax.set_ylabel("Total Sales")
-
-# Show the plot
-st.pyplot(fig)
+# Create a bar chart for sales by month using Streamlit
+st.bar_chart(sales_by_month.set_index("Month"))
 
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
