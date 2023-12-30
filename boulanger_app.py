@@ -66,6 +66,14 @@ with left_column:
     # Increase font size using HTML-style tags
     st.subheader("Total Sales:")
     st.markdown(f"<p style='font-size: 24px;'>{formatted_total_sales}</p>", unsafe_allow_html=True)
+    
+with right_column:
+    # Calculate average sales per day
+    Benefice = filtered_df[11. Benefice].sum(axis=0)
+    # display the profit total profit
+    st.subhead("Total Profit")
+    st.markdown(f"<p style='font-size: 24px;'>{Benefice}</p>", unsafe_allow_html=True)
+    
 
 st.markdown("""---""")
 
