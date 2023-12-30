@@ -69,7 +69,7 @@ with left_column:
     
 with right_column:
     # Calculate average sales per day
-    Benefice = filtered_df[11. Benefice].sum(axis=0)
+    Benefice = filtered_df[11.Benefice].sum(axis=0)
     # display the profit total profit
     st.subhead("Total Profit")
     st.markdown(f"<p style='font-size: 24px;'>{Benefice}</p>", unsafe_allow_html=True)
