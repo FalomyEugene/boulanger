@@ -1,3 +1,4 @@
+pip install -r requirements.txt
 import pandas as pd
 import gspread as gs
 from google.oauth2 import service_account
