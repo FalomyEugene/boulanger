@@ -67,23 +67,29 @@ with left_column:
     st.subheader("Total Sales:")
     st.markdown(f"<p style='font-size: 24px;'>{formatted_total_sales}</p>", unsafe_allow_html=True)
 
-st.markdown("""---""")
+with middle_column:
+    # Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
+    df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
 
-# Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
-df['Date du compte rendu?'] = pd.to_datetime(df['Date du compte rendu?'])
+    # Extract month from the 'Date du compte rendu?' column
+    df['Month'] = df['Date du compte rendu?'].dt.month_name()
 
-# Extract month from the 'Date du compte rendu?' column
-df['Month'] = df['Date du compte rendu?'].dt.month_name()
+    # Calculate total sales dynamically based on numeric columns
+    numeric_columns = df.select_dtypes(include='number').columns
+    df['Total Sales'] = df[numeric_columns].sum(axis=1)
 
-# Calculate total sales dynamically based on numeric columns
-numeric_columns = df.select_dtypes(include='number').columns
-df['Total Sales'] = df[numeric_columns].sum(axis=1)
+    # Group by month and sum the 'Total Sales'
+    sales_by_month = df.groupby(by=["Month"])[["Total Sales"]].sum().reset_index()
 
-# Group by month and sum the 'Total Sales'
-sales_by_month = df.groupby(by=["Month"])[["Total Sales"]].sum().reset_index()
+    # Create a bar chart for sales by month using Streamlit
+    st.bar_chart(sales_by_month.set_index("Month"))
 
-# Create a bar chart for sales by month using Streamlit
-st.bar_chart(sales_by_month.set_index("Month"))
+with right_column:
+    # Calculate average sales per day
+    avg_sales_per_day = filtered_df[numeric_columns].mean(axis=0)
+
+    # Create a line chart for average sales per day using Streamlit
+    st.line_chart(avg_sales_per_day)
 
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
