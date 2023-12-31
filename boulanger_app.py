@@ -124,6 +124,9 @@ with right_column:
     # Calculate total sales for each week
     weekly_total_sales = filtered_df.groupby('Week')[numeric_columns].sum()
 
+    # Reset the index to make 'DayOfWeek' a regular column
+    weekly_total_sales.reset_index(inplace=True)
+
     # Calculate the average sales for each day of the week
     avg_sales_per_day = weekly_total_sales.groupby('DayOfWeek').mean()
 
