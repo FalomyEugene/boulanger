@@ -124,12 +124,15 @@ with right_column:
     # Calculate average sales for each day of the week
     avg_sales_per_day = filtered_df.groupby('DayOfWeek')[numeric_columns].mean()
 
+    # Transpose the DataFrame to swap x and y axes
+    avg_sales_per_day_transposed = avg_sales_per_day.transpose()
+
     # Create a bar chart for average sales per day using Streamlit
-    st.bar_chart(avg_sales_per_day)
+    st.bar_chart(avg_sales_per_day_transposed)
 
     # Set chart labels and title using Streamlit functions
-    st.xlabel("Day of the Week")
-    st.ylabel("Average Sales")
+    st.xlabel("Average Sales")
+    st.ylabel("Day of the Week")
     st.title("Average Sales Per Day")
     st.subheader("Average Sales Per Day:")
 
