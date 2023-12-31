@@ -124,13 +124,19 @@ with right_column:
     # Calculate average sales for each day of the week
     avg_sales_per_day = filtered_df.groupby('DayOfWeek')[numeric_columns].mean()
 
-    # Create a line chart for average sales per day using Streamlit
-    st.line_chart(avg_sales_per_day)
+    # Create a line chart for average sales per day using Matplotlib
+    fig, ax = plt.subplots()
+    avg_sales_per_day.plot(kind='line', ax=ax)
 
-    # Set chart labels and title
+    # Set chart labels and title using Matplotlib functions
+    ax.set_xlabel("Day of the Week")
+    ax.set_ylabel("Average Sales")
+    ax.set_title("Average Sales Per Day")
+
+    # Display the Matplotlib figure in Streamlit
+    st.pyplot(fig)
     st.subheader("Average Sales Per Day:")
-    st.set_xlabel("Day of the Week")
-    st.set_ylabel("Average Sales")
+
 
 
 # with right_column:
