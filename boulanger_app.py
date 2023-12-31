@@ -129,8 +129,9 @@ with right_column:
 
     # Set chart labels and title
     st.subheader("Average Sales Per Day:")
-    st.xlabel("Day of the Week")
-    st.ylabel("Average Sales")
+    st.set_xlabel("Day of the Week")
+    st.set_ylabel("Average Sales")
+
 
 # with right_column:
 #     # Calculate average sales per day
