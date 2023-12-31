@@ -116,12 +116,28 @@ with left_column:
     # Create a bar chart for sales by month using Streamlit
     st.bar_chart(sales_by_month.set_index("Month"))
 
+
 with right_column:
-    # Calculate average sales per day
-    avg_sales_per_day = filtered_df[numeric_columns].mean(axis=0)
+    # Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
+    filtered_df['DayOfWeek'] = filtered_df['Date du compte rendu?'].dt.day_name()
+
+    # Calculate average sales for each day of the week
+    avg_sales_per_day = filtered_df.groupby('DayOfWeek')[numeric_columns].mean()
 
     # Create a line chart for average sales per day using Streamlit
     st.line_chart(avg_sales_per_day)
+
+    # Set chart labels and title
+    st.subheader("Average Sales Per Day:")
+    st.xlabel("Day of the Week")
+    st.ylabel("Average Sales")
+
+# with right_column:
+#     # Calculate average sales per day
+#     avg_sales_per_day = filtered_df[numeric_columns].mean(axis=0)
+
+#     # Create a line chart for average sales per day using Streamlit
+#     st.line_chart(avg_sales_per_day)
 
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
