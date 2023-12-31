@@ -79,13 +79,17 @@ with middle_column:
 
 # I want to do Avererage weekly sales
 with right_column:
-    # Calculate total profit
-    AVG_sales = filtered_df[numeric_columns].mean(axis=1)
-    formatted_AVG_sales = f"HT {AVG_sales:,}"
+    # Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
+    filtered_df['Week'] = filtered_df['Date du compte rendu?'].dt.strftime('%Y-%U')
 
-    # Display the AVG Slaes
-    st.subheader("Avererage Sales:")
-    st.markdown(f"<p style='font-size: 24px;'>{formatted_AVG_sales}</p>", unsafe_allow_html=True)
+    # Calculate weekly average sales
+    weekly_avg_sales = filtered_df.groupby('Week')[numeric_columns].mean(axis=1).mean()
+
+    # Format and display the weekly average sales
+    formatted_weekly_avg_sales = f"HT {weekly_avg_sales:,.2f}"
+    st.subheader("Weekly Average Sales:")
+    st.markdown(f"<p style='font-size: 24px;'>{formatted_weekly_avg_sales}</p>", unsafe_allow_html=True)
+
 
 st.markdown("""---""")
 
