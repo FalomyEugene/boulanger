@@ -122,7 +122,7 @@ with right_column:
     filtered_df['DayOfWeek'] = filtered_df['Date du compte rendu?'].dt.day_name()
 
     # Calculate average sales for each day of the week
-    avg_sales_per_day = filtered_df.groupby('DayOfWeek')[numeric_columns].mean()
+    avg_sales_per_day = filtered_df('DayOfWeek')[numeric_columns].mean()
 
     # Transpose the DataFrame to swap x and y axes
     avg_sales_per_day_transposed = avg_sales_per_day.transpose()
