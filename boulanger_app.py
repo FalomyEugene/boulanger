@@ -122,7 +122,7 @@ with right_column:
     filtered_df['DayOfWeek'] = filtered_df['Date du compte rendu?'].dt.day_name()
 
     # Calculate total sales for each week
-    weekly_total_sales = filtered_df.groupby('Week')[numeric_columns].sum()
+    weekly_total_sales = filtered_df.groupby(['Week', 'DayOfWeek'])[numeric_columns].sum()
 
     # Reset the index to make 'DayOfWeek' a regular column
     weekly_total_sales.reset_index(inplace=True)
