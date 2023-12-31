@@ -121,8 +121,11 @@ with right_column:
     # Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
     filtered_df['DayOfWeek'] = filtered_df['Date du compte rendu?'].dt.day_name()
 
-    # Calculate average sales for each day of the week
-    avg_sales_per_day = filtered_df.groupby('DayOfWeek')[numeric_columns].mean()
+    # Calculate total sales for each week
+    weekly_total_sales = filtered_df.groupby('Week')[numeric_columns].sum()
+
+    # Calculate the average sales for each day of the week
+    avg_sales_per_day = weekly_total_sales.groupby('DayOfWeek').mean()
 
     # Create a bar chart for average sales per day using Streamlit
     st.bar_chart(avg_sales_per_day)
