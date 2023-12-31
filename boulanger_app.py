@@ -53,7 +53,7 @@ end_date = pd.to_datetime(st.sidebar.date_input("Select End Date", datetime.now(
 filtered_df = df[df['Date du compte rendu?'].between(start_date, end_date)]
 
 # Display the filtered DataFrame
-st.write(filtered_df)
+#st.write(filtered_df)
 
 # TOP KPI's
 numeric_columns = filtered_df.select_dtypes(include='number').columns
@@ -75,6 +75,17 @@ with middle_column:
     # Display the total profit
     st.subheader("Total Profit:")
     st.markdown(f"<p style='font-size: 24px;'>{formatted_benefit_total}</p>", unsafe_allow_html=True)
+
+
+# I want to do Avererage weekly sales
+with right_column:
+    # Calculate total profit
+    AVG_sales = filtered_df[numeric_columns].mean(axis=1)
+    formatted_AVG_sales = f"HT {AVG_sales:,}"
+
+    # Display the AVG Slaes
+    st.subheader("Avererage Sales:")
+    st.markdown(f"<p style='font-size: 24px;'>{formatted_AVG_sales}</p>", unsafe_allow_html=True)
 
 st.markdown("""---""")
 
