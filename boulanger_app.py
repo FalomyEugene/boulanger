@@ -139,6 +139,7 @@ with right_column:
 
 
 
+
 # with right_column:
 #     # Calculate average sales per day
 #     avg_sales_per_day = filtered_df[numeric_columns].mean(axis=0)
