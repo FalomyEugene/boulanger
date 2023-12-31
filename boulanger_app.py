@@ -82,11 +82,14 @@ with right_column:
     # Assuming your DataFrame has a datetime column named 'Date du compte rendu?'
     filtered_df['Week'] = filtered_df['Date du compte rendu?'].dt.strftime('%Y-%U')
 
-    # Calculate weekly average sales
-    weekly_avg_sales = filtered_df.groupby('Week')[numeric_columns].mean(axis=1).mean()
+    # Calculate weekly average sales for each week
+    weekly_avg_sales = filtered_df.groupby('Week')[numeric_columns].mean(axis=1)
 
-    # Format and display the weekly average sales
-    formatted_weekly_avg_sales = f"HT {weekly_avg_sales:,.2f}"
+    # Calculate the overall average of weekly averages
+    overall_avg_sales = weekly_avg_sales.mean()
+
+    # Format and display the overall weekly average sales
+    formatted_weekly_avg_sales = f"HT {overall_avg_sales:,.2f}"
     st.subheader("Weekly Average Sales:")
     st.markdown(f"<p style='font-size: 24px;'>{formatted_weekly_avg_sales}</p>", unsafe_allow_html=True)
 
